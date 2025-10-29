@@ -2,26 +2,26 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 export default function Admin() {
-  const BACKEND_URL = https://site-4ry9.onrender.com; // remplace par ton URL Render réelle
+  const BACKEND_URL = "https://site-4ry9.onrender.com"; // URL Render
   const [videos, setVideos] = useState([]);
   const [title, setTitle] = useState('');
   const [url, setUrl] = useState('');
   const token = localStorage.getItem('token');
 
   useEffect(() => {
-    axios.get('https://<https://site-4ry9.onrender.com', { headers: { Authorization: token } })
+    axios.get(`${BACKEND_URL}/api/videos`, { headers: { Authorization: token } })
       .then(res => setVideos(res.data))
       .catch(err => console.log(err));
   }, []);
 
   const addVideo = () => {
-    axios.post('https://<https://site-4ry9.onrender.com>/api/admin/add', { title, url }, { headers: { Authorization: token } })
+    axios.post(`${BACKEND_URL}/api/admin/add`, { title, url }, { headers: { Authorization: token } })
       .then(res => setVideos([...videos, res.data.video]))
       .catch(err => console.log(err));
   };
 
   const deleteVideo = (id) => {
-    axios.delete(`https://<https://site-4ry9.onrender.com>/api/admin/delete/${id}`, { headers: { Authorization: token } })
+    axios.delete(`${BACKEND_URL}/api/admin/delete/${id}`, { headers: { Authorization: token } })
       .then(() => setVideos(videos.filter(v => v._id !== id)))
       .catch(err => console.log(err));
   };
