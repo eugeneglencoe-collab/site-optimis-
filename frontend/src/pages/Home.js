@@ -1,13 +1,12 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
 
 export default function Home() {
   return (
     <div className="home-container">
-      <h1>Gagnez de l'argent en regardant des vidéos</h1>
-      <p>Regardez des publicités, accumulez des jetons et convertissez-les en argent réel.</p>
-      <div className="home-cta">
-        <Link to="/dashboard"><button>Commencer</button></Link>
+      <div className="home-hero">
+        <h1>Bienvenue sur <span>Pubflix</span></h1>
+        <p>Regarde des publicités. Gagne de l’argent. Simple, rapide, transparent.</p>
+        <button className="cta-button">Commencer maintenant</button>
       </div>
     </div>
   );
