@@ -1,28 +1,40 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import "./Videos.css"; // Crée ce fichier pour le style
 
 export default function Videos() {
-  const token = localStorage.getItem('token');
   const [videos, setVideos] = useState([]);
+  const token = localStorage.getItem("token"); // Si tu veux sécuriser certaines vidéos
 
   useEffect(() => {
-    axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/videos`, {
-      headers: { Authorization: token }
-    })
-    .then(res => setVideos(res.data))
-    .catch(err => console.log(err));
-  }, []);
+    axios
+      .get("https://site-4ry9.onrender.com/api/videos", {
+        headers: { Authorization: token },
+      })
+      .then((res) => {
+        const data = Array.isArray(res.data) ? res.data : res.data.videos;
+        setVideos(data || []);
+      })
+      .catch((err) => console.log(err));
+  }, [token]);
 
   return (
-    <div className="video-grid">
-      {videos.map(video => (
-        <div className="card" key={video._id}>
-          <h3>{video.title}</h3>
-          <a href={video.url} target="_blank" rel="noopener noreferrer">
-            <button>Regarder</button>
-          </a>
+    <div className="videos-container">
+      <h1 className="videos-title">Publicités à regarder</h1>
+
+      {videos.length === 0 ? (
+        <p className="videos-empty">Aucune vidéo disponible pour le moment.</p>
+      ) : (
+        <div className="videos-carousel">
+          {videos.map((v) => (
+            <div className="video-card" key={v._id}>
+              <video src={v.url} controls className="video-player" />
+              <h3 className="video-title">{v.title}</h3>
+              <button className="video-button">Regarder et gagner</button>
+            </div>
+          ))}
         </div>
-      ))}
+      )}
     </div>
   );
 }
