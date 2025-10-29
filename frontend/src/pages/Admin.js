@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import './Admin.css';
 
 export default function Admin() {
-  const BACKEND_URL = "https://site-4ry9.onrender.com"; // URL Render
+  const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
   const [videos, setVideos] = useState([]);
   const [title, setTitle] = useState('');
   const [url, setUrl] = useState('');
@@ -27,15 +28,16 @@ export default function Admin() {
   };
 
   return (
-    <div className="admin">
+    <div className="admin-container">
       <h1>Admin Panel</h1>
       <input placeholder="Titre" value={title} onChange={e => setTitle(e.target.value)} />
       <input placeholder="URL" value={url} onChange={e => setUrl(e.target.value)} />
       <button onClick={addVideo}>Ajouter Vidéo</button>
       <div>
         {videos.map(v => (
-          <div key={v._id}>
-            {v.title} <button onClick={() => deleteVideo(v._id)}>Supprimer</button>
+          <div className="card" key={v._id}>
+            <h3>{v.title}</h3>
+            <button onClick={() => deleteVideo(v._id)}>Supprimer</button>
           </div>
         ))}
       </div>
