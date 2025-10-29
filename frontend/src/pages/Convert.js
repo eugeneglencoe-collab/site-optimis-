@@ -1,29 +1,31 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import './Convert.css';
 
-function Convert() {
-  const [tokens, setTokens] = useState('');
+export default function Convert() {
+  const token = localStorage.getItem('token');
+  const [tokens, setTokens] = useState(0);
+  const [amount, setAmount] = useState(0);
 
-  const handleConvert = (e) => {
-    e.preventDefault();
-    alert(`Vous avez converti ${tokens} jetons en argent fictif !`);
-    setTokens('');
+  useEffect(() => {
+    axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/stats`, {
+      headers: { Authorization: token }
+    })
+    .then(res => setTokens(res.data.tokens))
+    .catch(err => console.log(err));
+  }, []);
+
+  const convert = () => {
+    setAmount(tokens * 0.01);
+    alert(`Vous avez converti vos jetons en ${tokens * 0.01} € !`);
   };
 
   return (
     <div className="convert-container">
-      <h1>Convertir vos jetons en argent réel</h1>
-      <form onSubmit={handleConvert}>
-        <input
-          type="number"
-          placeholder="Nombre de jetons"
-          value={tokens}
-          onChange={(e) => setTokens(e.target.value)}
-          required
-        />
-        <button type="submit">Convertir</button>
-      </form>
+      <h1>Convertir vos jetons</h1>
+      <p>Jetons disponibles : {tokens}</p>
+      <button onClick={convert}>Convertir en argent</button>
+      {amount > 0 && <p>Montant converti : {amount} €</p>}
     </div>
   );
 }
-
-export default Convert;
