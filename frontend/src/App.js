@@ -1,9 +1,21 @@
 import React from 'react';
+import { Routes, Route } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import Dashboard from './components/Dashboard';
+import AdsPage from './components/AdsPage';
+import ConvertTokens from './components/ConvertTokens';
+import About from './components/About';
 
 function App() {
   return (
     <div>
-      <h1>Pubflix frontend fonctionne !</h1>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Dashboard />} />
+        <Route path="/ads" element={<AdsPage />} />
+        <Route path="/convert" element={<ConvertTokens />} />
+        <Route path="/about" element={<About />} />
+      </Routes>
     </div>
   );
 }
