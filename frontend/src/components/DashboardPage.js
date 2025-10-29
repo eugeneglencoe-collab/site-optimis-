@@ -1,21 +1,36 @@
-import { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import './Dashboard.css';
 
 export default function Dashboard() {
-  const [user, setUser] = useState({ tokens: 0, videosWatched: 0 });
+  const token = localStorage.getItem('token');
+  const [stats, setStats] = useState({ videosWatched: 0, tokens: 0, money: 0 });
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
-    axios.get('https://<ton_backend_url>/api/auth/me', { headers: { Authorization: token } })
-      .then(res => setUser(res.data))
-      .catch(err => console.log(err));
+    axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/stats`, {
+      headers: { Authorization: token }
+    })
+    .then(res => setStats(res.data))
+    .catch(err => console.log(err));
   }, []);
 
   return (
-    <div className="dashboard">
-      <h1>Tableau de bord</h1>
-      <p>Jetons : {user.tokens}</p>
-      <p>Vidéos regardées : {user.videosWatched}</p>
+    <div className="dashboard-container">
+      <h1>Dashboard</h1>
+      <div className="stats-grid">
+        <div className="stats-card">
+          <h2>{stats.videosWatched}</h2>
+          <p>Vidéos regardées</p>
+        </div>
+        <div className="stats-card">
+          <h2>{stats.tokens}</h2>
+          <p>Jetons accumulés</p>
+        </div>
+        <div className="stats-card">
+          <h2>{stats.money} €</h2>
+          <p>Argent gagné</p>
+        </div>
+      </div>
     </div>
   );
 }
