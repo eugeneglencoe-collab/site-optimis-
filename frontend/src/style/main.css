@@ -1,4 +1,32 @@
 /* ==== Global ========== */
+body {
+  margin: 0;
+  font-family: "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background: #0e0e0e;
+  color: #fff;
+  scroll-behavior: smooth;
+}
+
+h1, h2, h3 {
+  letter-spacing: 0.5px;
+}
+
+button {
+  background: linear-gradient(90deg, #f5c518, #e4a400);
+  border: none;
+  color: #000;
+  font-weight: 600;
+  padding: 0.8rem 1.5rem;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(245, 197, 24, 0.3);
+}
+
 :root {
   --color-bg: #000000;
   --color-text: #FFFFFF;
