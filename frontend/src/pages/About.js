@@ -1,16 +1,14 @@
 import React from 'react';
+import './About.css';
 
-function About() {
+export default function About() {
   return (
-    <div className="about-container">
+    <div className="section">
       <h1>À propos de Pubflix</h1>
       <p>
-        Pubflix est une plateforme SaaS qui permet aux utilisateurs de gagner de l'argent
-        en regardant des publicités. Chaque vue vous rapporte des jetons que vous pouvez
-        ensuite convertir en argent réel.
+        Pubflix est une plateforme SaaS innovante permettant aux utilisateurs de gagner de l'argent en regardant des publicités. 
+        Nous connectons les utilisateurs aux marques tout en offrant une expérience simple, moderne et transparente.
       </p>
     </div>
   );
 }
-
-export default About;
