@@ -1,7 +1,7 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
-import Dashboard from './components/Dashboard';
+import DashboardPage from './components/DashboardPage';
 import StatsCard from './components/StatsCard';
 import VideoCard from './components/VideoCard';
 
@@ -17,7 +17,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/dashboard" element={<DashboardPage />} />
         <Route path="/videos" element={<Videos />} />
         <Route path="/convert" element={<Convert />} />
         <Route path="/about" element={<About />} />
