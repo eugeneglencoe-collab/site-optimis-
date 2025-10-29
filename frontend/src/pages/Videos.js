@@ -1,23 +1,29 @@
-import React from 'react';
-import VideoCard from '../components/VideoCard';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import './Videos.css';
 
-function Videos() {
-  const mockVideos = [
-    { id: 1, title: 'Pub 1', description: 'Description de la pub 1' },
-    { id: 2, title: 'Pub 2', description: 'Description de la pub 2' },
-    { id: 3, title: 'Pub 3', description: 'Description de la pub 3' },
-  ];
+export default function Videos() {
+  const token = localStorage.getItem('token');
+  const [videos, setVideos] = useState([]);
+
+  useEffect(() => {
+    axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/videos`, {
+      headers: { Authorization: token }
+    })
+    .then(res => setVideos(res.data))
+    .catch(err => console.log(err));
+  }, []);
 
   return (
-    <div className="videos-container">
-      <h1>Toutes les publicités</h1>
-      <div className="videos-grid">
-        {mockVideos.map((video) => (
-          <VideoCard key={video.id} title={video.title} description={video.description} />
-        ))}
-      </div>
+    <div className="video-grid">
+      {videos.map(video => (
+        <div className="card" key={video._id}>
+          <h3>{video.title}</h3>
+          <a href={video.url} target="_blank" rel="noopener noreferrer">
+            <button>Regarder</button>
+          </a>
+        </div>
+      ))}
     </div>
   );
 }
-
-export default Videos;
