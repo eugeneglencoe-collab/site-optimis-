@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import './Admin.css';
 
 export default function Admin() {
   const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
