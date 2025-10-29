@@ -1,6 +1,7 @@
 import React from "react";
 
 export default function Home() {
+  console.log("✅ Page Home chargée !");
   return (
     <div style={{
       height: "100vh",
