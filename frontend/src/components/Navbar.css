@@ -1,39 +1,29 @@
-/* Navbar container */
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #000; /* noir luxe */
-  padding: 10px 30px;
-  color: gold; /* accent luxe */
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  padding: 20px 50px;
+  background-color: #000;
   position: sticky;
   top: 0;
-  z-index: 1000;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+  z-index: 999;
 }
 
-/* Logo / site name */
 .navbar h2 {
-  font-size: 1.8rem;
-  font-weight: bold;
-  color: gold;
-  margin: 0;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  color: #FFD700;
+  font-size: 2rem;
 }
 
-/* Navigation links */
 .nav-links {
-  list-style: none;
   display: flex;
-  gap: 25px;
-  margin: 0;
-  padding: 0;
+  gap: 30px;
+  list-style: none;
 }
 
 .nav-links li a {
-  color: gold;
-  text-decoration: none;
   font-weight: 500;
+  color: #FFD700;
   transition: color 0.3s ease;
 }
 
@@ -41,16 +31,13 @@
   color: #fff;
 }
 
-/* Responsive menu for small screens */
 @media (max-width: 768px) {
   .navbar {
     flex-direction: column;
-    align-items: flex-start;
+    gap: 15px;
   }
-
   .nav-links {
     flex-direction: column;
     gap: 10px;
-    margin-top: 10px;
   }
 }
