@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import './Convert.css';
 
 export default function Convert() {
   const token = localStorage.getItem('token');
