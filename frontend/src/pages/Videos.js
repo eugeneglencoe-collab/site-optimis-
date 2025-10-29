@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import './Videos.css';
 
 export default function Videos() {
   const token = localStorage.getItem('token');
