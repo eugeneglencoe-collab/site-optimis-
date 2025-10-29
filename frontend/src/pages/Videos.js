@@ -1,33 +1,23 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+import React from 'react';
+import VideoCard from '../components/VideoCard';
 
-export default function Videos() {
-  const [videos, setVideos] = useState([]);
-  const token = localStorage.getItem('token');
-
-  useEffect(() => {
-    axios.get('https://<ton_backend_url>/api/videos', { headers: { Authorization: token } })
-      .then(res => setVideos(res.data))
-      .catch(err => console.log(err));
-  }, []);
-
-  const watchVideo = (id) => {
-    axios.post(`https://<ton_backend_url>/api/videos/watch/${id}`, {}, { headers: { Authorization: token } })
-      .then(res => alert(`Vous avez gagné 1 centime ! Total jetons : ${res.data.tokens}`))
-      .catch(err => console.log(err));
-  };
+function Videos() {
+  const mockVideos = [
+    { id: 1, title: 'Pub 1', description: 'Description de la pub 1' },
+    { id: 2, title: 'Pub 2', description: 'Description de la pub 2' },
+    { id: 3, title: 'Pub 3', description: 'Description de la pub 3' },
+  ];
 
   return (
-    <div className="videos">
-      <h1>Toutes les vidéos</h1>
-      <div className="video-grid">
-        {videos.map(v => (
-          <div key={v._id} className="video-card">
-            <h3>{v.title}</h3>
-            <button onClick={() => watchVideo(v._id)}>Regarder</button>
-          </div>
+    <div className="videos-container">
+      <h1>Toutes les publicités</h1>
+      <div className="videos-grid">
+        {mockVideos.map((video) => (
+          <VideoCard key={video.id} title={video.title} description={video.description} />
         ))}
       </div>
     </div>
   );
 }
+
+export default Videos;
